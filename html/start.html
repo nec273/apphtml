@@ -17,8 +17,6 @@
       background:#fff;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Noto Sans KR",sans-serif;
     }
-
-    /* 전체 스택: 양옆 꽉 채우고, 세로로 크게 배치 */
     .stack{
       min-height:100%;
       display:flex;
@@ -29,32 +27,27 @@
         0
         calc(24px + env(safe-area-inset-bottom));
     }
-
-    /* 풀블리드 타일 */
     .tile{
-      width:100vw;                 /* 좌우 끝까지 */
-      height:clamp(96px, 24vh, 180px); /* 화면 비율 따라 커짐 */
+      width:100vw;
+      height:clamp(96px, 24vh, 180px);
       display:flex;
       align-items:center;
       justify-content:center;
       color:var(--txt);
       font-weight:800;
-      font-size:clamp(22px, 5.8vw, 36px); /* 큰 글씨 */
+      font-size:clamp(22px, 5.8vw, 36px);
       letter-spacing:.2px;
       text-decoration:none;
       border:none;
-      border-radius:0;             /* 완전 꽉 차는 느낌 */
+      border-radius:0;
       -webkit-tap-highlight-color:transparent;
       touch-action:manipulation;
       transition:filter .12s ease, transform .06s ease;
     }
     .tile:active{ transform:scale(.995); filter:brightness(.96); }
-
     .sky{ background:var(--sky); }
     .yt { background:var(--yt); }
     .grn{ background:var(--grn); }
-
-    /* 큰 태블릿/데스크탑에서 너무 넓어 보이면 중앙 정렬 */
     @media (min-width:900px){
       .stack{ align-items:center; }
       .tile{ max-width:900px; }
@@ -62,40 +55,50 @@
   </style>
 
   <script>
-    function goToChurch(){
+    // 공용 오프너: RN이면 postMessage + 150ms 후 강제 이동, 아니면 기본 이동
+    function openUrl(e, url, type){
       try{
-        if(window.ReactNativeWebView && window.ReactNativeWebView.postMessage){
-          window.ReactNativeWebView.postMessage("goToChurch");
-          return;
+        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage){
+          e && e.preventDefault();
+          window.ReactNativeWebView.postMessage(JSON.stringify({ type, url }));
+          setTimeout(function(){ window.location.href = url; }, 150);
+          return false; // a태그 기본 이동 막음(우선 앱이 처리)
         }
-      }catch(e){}
-      window.location.href="http://www.saenurii.net/";
+      }catch(err){}
+      return true; // 웹 환경: 기본 이동(href) 진행
     }
-    function goToYoutube(){
-      try{
-        if(window.ReactNativeWebView && window.ReactNativeWebView.postMessage){
-          window.ReactNativeWebView.postMessage("goToYoutube");
-          return;
-        }
-      }catch(e){}
-      window.location.href="https://www.youtube.com/@Saenurii_Church/featured";
+
+    function goToChurch(e){
+      return openUrl(e, "http://www.saenurii.net/", "goToChurch");
     }
-    function goToNews(){
-      try{
-        if(window.ReactNativeWebView && window.ReactNativeWebView.postMessage){
-          window.ReactNativeWebView.postMessage("goToNews");
-          return;
-        }
-      }catch(e){}
-      window.location.href="http://www.saenurii.net/board/list.do?iboardgroupseq=4&iboardmanagerseq=18";
+    function goToYoutube(e){
+      return openUrl(e, "https://www.youtube.com/@Saenurii_Church/featured", "goToYoutube");
+    }
+    function goToNews(e){
+      // 가능하면 https로 운영하는 게 좋아요(안드로이드 클리어텍스트 회피)
+      return openUrl(e, "http://www.saenurii.net/board/list.do?iboardgroupseq=4&iboardmanagerseq=18", "goToNews");
     }
   </script>
 </head>
 <body>
   <nav class="stack" aria-label="빠른 실행">
-    <button class="tile sky" type="button" onclick="goToChurch()" aria-label="교회 바로가기">교회 바로가기</button>
-    <button class="tile yt"  type="button" onclick="goToYoutube()" aria-label="새누리교회 유튜브">새누리교회 유튜브</button>
-    <button class="tile grn" type="button" onclick="goToNews()" aria-label="교회소식">교회소식</button>
+    <!-- 교회 바로가기 -->
+    <a class="tile sky"
+       href="http://www.saenurii.net/"
+       onclick="return goToChurch(event)"
+       aria-label="교회 바로가기">교회 바로가기</a>
+
+    <!-- 유튜브 -->
+    <a class="tile yt"
+       href="https://www.youtube.com/@Saenurii_Church/featured"
+       onclick="return goToYoutube(event)"
+       aria-label="새누리교회 유튜브">새누리교회 유튜브</a>
+
+    <!-- 교회소식 -->
+    <a class="tile grn"
+       href="http://www.saenurii.net/board/list.do?iboardgroupseq=4&iboardmanagerseq=18"
+       onclick="return goToNews(event)"
+       aria-label="교회소식">교회소식</a>
   </nav>
 </body>
 </html>
