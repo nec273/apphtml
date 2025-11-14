@@ -25,37 +25,40 @@
       min-height:100%;
       display:flex;
       flex-direction:column;
-      gap:24px;
-      padding:calc(18px + env(safe-area-inset-top))
-               max(16px, env(safe-area-inset-right))
-               calc(28px + env(safe-area-inset-bottom))
-               max(16px, env(safe-area-inset-left));
-      max-width:480px;           /* 갤럭시 기준 폭 */
-      margin:0 auto;             /* 가운데 정렬 */
+      gap:16px;  /* 헤더-아이콘-하단 간격 조금 줄임 */
+      padding:calc(12px + env(safe-area-inset-top))
+               max(14px, env(safe-area-inset-right))
+               calc(18px + env(safe-area-inset-bottom))
+               max(14px, env(safe-area-inset-left));
+      max-width:430px;   /* 갤럭시 세로 모드 폭 느낌에 더 가깝게 */
+      margin:0 auto;
     }
 
     /* 헤더 */
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      margin:4px 2px 10px;
+      gap:10px;
+      margin:0 2px 4px;   /* 위/아래 여백 줄이기 */
     }
     .logo{
-      width:200px;    /* 로고 크게 */
-      height:72px;
+      width:195px;
+      height:64px;
       display:flex;
       align-items:center;
-      justify-content:center;
+      justify-content:flex-start;
     }
     .brand-logo{
       width:100%;
       height:100%;
       object-fit:contain;
       display:block;
+      image-rendering:-webkit-optimize-contrast;
+      image-rendering:crisp-edges;
+      image-rendering:pixelated;
     }
     .title{
-      font-size:26px;
+      font-size:24px;
       font-weight:900;
       letter-spacing:.2px;
     }
@@ -64,8 +67,9 @@
     .grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:24px 20px;        /* 세로, 가로 간격 */
-      justify-items:center; /* 아이콘 가운데 정렬 */
+      row-gap:14px;   /* 세로 간격 줄임 */
+      column-gap:12px;/* 좌우 간격 줄임 */
+      justify-items:center;
     }
 
     .icon-card{
@@ -78,10 +82,13 @@
     }
 
     .main-icon{
-      width:110px;          /* 아이콘 크기 (필요하면 조절) */
+      width:90px;          /* 갤럭시에서 보기 좋은 크기 */
       height:auto;
       object-fit:contain;
       display:block;
+      image-rendering:-webkit-optimize-contrast;
+      image-rendering:crisp-edges;
+      image-rendering:pixelated;
     }
 
     .icon-card:active .main-icon{
@@ -92,8 +99,8 @@
     .dock{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:16px;
-      margin-top:24px;
+      gap:10px;          /* 아이콘 사이 간격 줄이기 */
+      margin-top:12px;   /* 메인 아이콘과의 간격 줄이기 */
     }
     .dock a{
       text-decoration:none;
@@ -101,13 +108,13 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      gap:8px;
+      gap:6px;
       -webkit-tap-highlight-color:transparent;
     }
     .pill{
-      width:64px;
-      height:64px;
-      border-radius:20px;
+      width:56px;
+      height:56px;
+      border-radius:18px;
       background:transparent;
       box-shadow:none;
       display:flex;
@@ -121,9 +128,12 @@
       max-height:100%;
       object-fit:contain;
       display:block;
+      image-rendering:-webkit-optimize-contrast;
+      image-rendering:crisp-edges;
+      image-rendering:pixelated;
     }
     .dock label{
-      font-size:13px;
+      font-size:12px;
       font-weight:800;
     }
   </style>
@@ -156,7 +166,7 @@
     <div class="brand">
       <div class="logo">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/00.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/00.png"
           alt="로고"
           class="brand-logo"
         >
@@ -173,7 +183,7 @@
          onclick="return goToChurch(event)"
          aria-label="교회 바로가기">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/01.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/01.png"
           alt="교회 바로가기"
           class="main-icon"
         >
@@ -185,7 +195,7 @@
          onclick="return goToYoutube(event)"
          aria-label="유튜브">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/02.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/02.png"
           alt="유튜브"
           class="main-icon"
         >
@@ -197,7 +207,7 @@
          onclick="return openUrl(event, this.href, 'news')"
          aria-label="교회소식">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/03.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/03.png"
           alt="교회소식"
           class="main-icon"
         >
@@ -209,7 +219,7 @@
          onclick="return openUrl(event, this.href, 'greeting')"
          aria-label="인사말">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/04.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/04.png"
           alt="인사말"
           class="main-icon"
         >
@@ -221,7 +231,7 @@
          onclick="return openUrl(event, this.href, 'sunday-worship')"
          aria-label="주일예배">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/06.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/06.png"
           alt="주일예배"
           class="main-icon"
         >
@@ -233,7 +243,7 @@
          onclick="return openUrl(event, this.href, 'wednesday-worship')"
          aria-label="수요예배">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/05.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/05.png"
           alt="수요예배"
           class="main-icon"
         >
@@ -245,7 +255,7 @@
          onclick="return openUrl(event, this.href, 'press-column')"
          aria-label="교계 신문 칼럼">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/07.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/07.png"
           alt="교계 신문 칼럼"
           class="main-icon"
         >
@@ -257,7 +267,7 @@
          onclick="return openUrl(event, this.href, 'pastor-column')"
          aria-label="목회칼럼">
         <img
-          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/08.png"
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/08.png"
           alt="목회칼럼"
           class="main-icon"
         >
@@ -272,7 +282,7 @@
          onclick="return openUrl(event, this.href, 'mission-vision')">
         <div class="pill">
           <img
-            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/11.png"
+            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/11.png"
             alt="사명과 비전"
             class="pill-icon"
           >
@@ -285,7 +295,7 @@
          onclick="return openUrl(event, this.href, 'worship-reminder')">
         <div class="pill">
           <img
-            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/12.png"
+            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/12.png"
             alt="예배알림"
             class="pill-icon"
           >
@@ -298,7 +308,7 @@
          onclick="return openUrl(event, this.href, 'location')">
         <div class="pill">
           <img
-            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/13.png"
+            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/251114/13.png"
             alt="찾아오시는 길"
             class="pill-icon"
           >
