@@ -6,52 +6,128 @@
   <title>새누리교회</title>
   <style>
     :root{
-      --bg:#f6f8fb; --card:#fff; --text:#0f172a; --muted:#6b7280;
-      --radius:22px; --shadow:0 6px 22px rgba(15,23,42,.08);
-      --pill:#eef2f7;
+      --bg:#f6f8fb;
+      --text:#0f172a;
     }
+
     html,body{height:100%}
     body{
-      margin:0; background:var(--bg); color:var(--text);
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,"Noto Sans KR",sans-serif;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
+
+    /* 전체 레이아웃 (갤럭시 폭 기준) */
     .wrap{
-      min-height:100%; display:flex; flex-direction:column; gap:18px;
-      padding:calc(18px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
-              calc(28px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      gap:24px;
+      padding:calc(18px + env(safe-area-inset-top))
+               max(16px, env(safe-area-inset-right))
+               calc(28px + env(safe-area-inset-bottom))
+               max(16px, env(safe-area-inset-left));
+      max-width:480px;           /* 갤럭시 기준 폭 */
+      margin:0 auto;             /* 가운데 정렬 */
     }
+
     /* 헤더 */
-    .brand{display:flex; align-items:center; gap:12px; margin:2px 2px 6px}
-    .logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#fde68a,#bfdbfe);
-      display:grid;place-items:center;font-weight:900;color:#111827}
-    .title{font-size:22px;font-weight:900;letter-spacing:.2px}
-
-    /* 메인 그리드(6) */
-    .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
-    @media (min-width:900px){ .wrap{max-width:980px;margin:0 auto} .grid{grid-template-columns:repeat(3,1fr)} }
-    .card{
-      text-decoration:none;color:inherit;background:var(--card);border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:18px; display:flex; flex-direction:column; gap:14px;
-      transition:transform .08s ease, filter .12s ease; -webkit-tap-highlight-color:transparent;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin:4px 2px 10px;
     }
-    .card:active{transform:scale(.99); filter:brightness(.98)}
-    .row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-    .h{margin:0;font-size:20px;line-height:1.15;font-weight:900}
-    .sub{margin:6px 0 0;font-size:13px;color:var(--muted);font-weight:700}
-    .ico{width:56px;height:56px;border-radius:16px;background:#f1f5f9;display:grid;place-items:center}
-    .ico svg{width:28px;height:28px;stroke:#0f172a}
+    .logo{
+      width:200px;    /* 로고 크게 */
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .brand-logo{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .title{
+      font-size:26px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
 
-    /* 하단 원형 아이콘(3) */
-    .dock{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:6px}
-    .dock a{ text-decoration:none; color:inherit; display:flex; flex-direction:column; align-items:center; gap:8px }
-    .pill{width:64px;height:64px;border-radius:20px;background:var(--pill); box-shadow:var(--shadow);
-      display:grid;place-items:center; transition:transform .08s ease; }
+    /* 메인 아이콘 그리드 (2개씩) */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:24px 20px;        /* 세로, 가로 간격 */
+      justify-items:center; /* 아이콘 가운데 정렬 */
+    }
+
+    .icon-card{
+      text-decoration:none;
+      color:inherit;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .main-icon{
+      width:110px;          /* 아이콘 크기 (필요하면 조절) */
+      height:auto;
+      object-fit:contain;
+      display:block;
+    }
+
+    .icon-card:active .main-icon{
+      transform:scale(.96);
+    }
+
+    /* 하단 원형 아이콘 3개 */
+    .dock{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:24px;
+    }
+    .dock a{
+      text-decoration:none;
+      color:inherit;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:8px;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .pill{
+      width:64px;
+      height:64px;
+      border-radius:20px;
+      background:transparent;
+      box-shadow:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .08s ease;
+    }
     .dock a:active .pill{transform:scale(.96)}
-    .dock svg{width:28px;height:28px;stroke:#0f172a}
-    .dock label{font-size:13px;font-weight:800}
-
+    .pill-icon{
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      display:block;
+    }
+    .dock label{
+      font-size:13px;
+      font-weight:800;
+    }
   </style>
+
   <script>
     // RN이면 postMessage + 150ms 후 강제 이동, 아니면 기본 이동
     function openUrl(e, url, type){
@@ -78,123 +154,113 @@
 
     <!-- 헤더 -->
     <div class="brand">
-      <div class="logo">로고</div>
-      <div class="title">새누리교회</div>
+      <div class="logo">
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/00.png"
+          alt="로고"
+          class="brand-logo"
+        >
+      </div>
+      <div class="title"></div>
     </div>
 
-    <!-- 메인 아이콘 6개 (2×3) -->
+    <!-- 메인 아이콘 (2개씩) -->
     <section class="grid" aria-label="메인 바로가기">
 
       <!-- 교회 바로가기 -->
-      <a class="card"
+      <a class="icon-card"
          href="http://www.saenurii.net/"
          onclick="return goToChurch(event)"
          aria-label="교회 바로가기">
-        <div class="row">
-          <div>
-            <h3 class="h">교회 바로가기</h3>
-            <p class="sub">Homepage</p>
-          </div>
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-              <path d="M3 10.5l9-7 9 7"/><path d="M5 10v9h14v-9"/>
-            </svg>
-          </div>
-        </div>
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/01.png"
+          alt="교회 바로가기"
+          class="main-icon"
+        >
       </a>
 
       <!-- 유튜브 -->
-      <a class="card"
+      <a class="icon-card"
          href="https://www.youtube.com/@Saenurii_Church/featured"
          onclick="return goToYoutube(event)"
          aria-label="유튜브">
-        <div class="row">
-          <div>
-            <h3 class="h">유튜브</h3>
-            <p class="sub">YouTube</p>
-          </div>
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-              <rect x="3" y="6" width="18" height="12" rx="3"/>
-              <path d="M10 9l6 3-6 3z"/>
-            </svg>
-          </div>
-        </div>
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/02.png"
+          alt="유튜브"
+          class="main-icon"
+        >
       </a>
 
       <!-- 교회소식 -->
-      <a class="card"
+      <a class="icon-card"
          href="http://www.saenurii.net/board/list.do?iboardgroupseq=4&iboardmanagerseq=18"
          onclick="return openUrl(event, this.href, 'news')"
          aria-label="교회소식">
-        <div class="row">
-          <div>
-            <h3 class="h">교회소식</h3>
-            <p class="sub">News</p>
-          </div>
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-              <rect x="3" y="4" width="18" height="14" rx="2"/>
-              <path d="M7 8h7M7 12h10M7 16h6"/>
-            </svg>
-          </div>
-        </div>
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/03.png"
+          alt="교회소식"
+          class="main-icon"
+        >
       </a>
 
       <!-- 인사말 -->
-      <a class="card"
+      <a class="icon-card"
          href="http://www.saenurii.net/board/view.do?iboardgroupseq=1&iboardmanagerseq=1"
          onclick="return openUrl(event, this.href, 'greeting')"
          aria-label="인사말">
-        <div class="row">
-          <div>
-            <h3 class="h">인사말</h3>
-            <p class="sub">Greeting</p>
-          </div>
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-              <path d="M4 20l5-1 10-10a2.5 2.5 0 1 0-3.5-3.5L5.5 15.5 4 20z"/>
-              <path d="M14 6l4 4"/>
-            </svg>
-          </div>
-        </div>
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/04.png"
+          alt="인사말"
+          class="main-icon"
+        >
+      </a>
+
+      <!-- 주일예배 -->
+      <a class="icon-card"
+         href="http://www.saenurii.net/board/list.do?iboardgroupseq=2&iboardmanagerseq=10"
+         onclick="return openUrl(event, this.href, 'sunday-worship')"
+         aria-label="주일예배">
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/06.png"
+          alt="주일예배"
+          class="main-icon"
+        >
+      </a>
+
+      <!-- 수요예배 -->
+      <a class="icon-card"
+         href="http://www.saenurii.net/board/list.do?iboardgroupseq=2&iboardmanagerseq=52"
+         onclick="return openUrl(event, this.href, 'wednesday-worship')"
+         aria-label="수요예배">
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/05.png"
+          alt="수요예배"
+          class="main-icon"
+        >
       </a>
 
       <!-- 교계 신문 칼럼 -->
-      <a class="card"
+      <a class="icon-card"
          href="http://www.saenurii.net/board/list.do?iboardgroupseq=2&iboardmanagerseq=43"
          onclick="return openUrl(event, this.href, 'press-column')"
          aria-label="교계 신문 칼럼">
-        <div class="row">
-          <div>
-            <h3 class="h">교계 신문 칼럼</h3>
-            <p class="sub">Christian Press</p>
-          </div>
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-              <rect x="3" y="4" width="18" height="14" rx="2"/>
-              <path d="M7 8h7M7 12h10M7 16h6"/>
-            </svg>
-          </div>
-        </div>
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/07.png"
+          alt="교계 신문 칼럼"
+          class="main-icon"
+        >
       </a>
 
       <!-- 목회칼럼 -->
-      <a class="card"
+      <a class="icon-card"
          href="http://www.saenurii.net/board/list.do?iboardgroupseq=2&iboardmanagerseq=14"
          onclick="return openUrl(event, this.href, 'pastor-column')"
          aria-label="목회칼럼">
-        <div class="row">
-          <div>
-            <h3 class="h">목회칼럼</h3>
-            <p class="sub">Pastor’s Column</p>
-          </div>
-          <div class="ico" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-              <path d="M12 19l7-7a3 3 0 1 0-4-4l-7 7-3 1 1-3 7-7"/>
-            </svg>
-          </div>
-        </div>
+        <img
+          src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/08.png"
+          alt="목회칼럼"
+          class="main-icon"
+        >
       </a>
 
     </section>
@@ -204,27 +270,40 @@
       <!-- 사명과 비전 -->
       <a href="http://www.saenurii.net/board/view.do?iboardgroupseq=1&iboardmanagerseq=3"
          onclick="return openUrl(event, this.href, 'mission-vision')">
-        <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-          <circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/></svg></div>
-        <label>사명과 비전</label>
+        <div class="pill">
+          <img
+            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/11.png"
+            alt="사명과 비전"
+            class="pill-icon"
+          >
+        </div>
+        <label></label>
       </a>
 
       <!-- 예배알림 -->
       <a href="http://www.saenurii.net/board/view.do?iboardgroupseq=2&iboardmanagerseq=9"
          onclick="return openUrl(event, this.href, 'worship-reminder')">
-        <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-          <path d="M18 8a6 6 0 10-12 0c0 7-3 7-3 7h18s-3 0-3-7"/>
-          <path d="M13.7 21a2 2 0 01-3.4 0"/></svg></div>
-        <label>예배알림</label>
+        <div class="pill">
+          <img
+            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/12.png"
+            alt="예배알림"
+            class="pill-icon"
+          >
+        </div>
+        <label></label>
       </a>
 
       <!-- 찾아오시는 길 -->
       <a href="http://www.saenurii.net/board/view.do?iboardgroupseq=1&iboardmanagerseq=8"
          onclick="return openUrl(event, this.href, 'location')">
-        <div class="pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-          <path d="M12 22s7-6.58 7-11a7 7 0 10-14 0c0 4.42 7 11 7 11z"/>
-          <circle cx="12" cy="11" r="2.5"/></svg></div>
-        <label>찾아오시는 길</label>
+        <div class="pill">
+          <img
+            src="https://ecimg.cafe24img.com/pg2254b80680327076/linkcross/app/snc250825/13.png"
+            alt="찾아오시는 길"
+            class="pill-icon"
+          >
+        </div>
+        <label></label>
       </a>
     </section>
 
