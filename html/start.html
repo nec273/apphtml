@@ -20,33 +20,31 @@
       -moz-osx-font-smoothing:grayscale;
     }
 
-    /* 전체 레이아웃 (갤럭시 폭 기준) */
+    /* 전체 레이아웃 (갤럭시 폭 기준, 간격 압축) */
     .wrap{
       min-height:100%;
       display:flex;
       flex-direction:column;
-      gap:16px;  /* 헤더-아이콘-하단 간격 조금 줄임 */
-      padding:calc(12px + env(safe-area-inset-top))
-               max(14px, env(safe-area-inset-right))
-               calc(18px + env(safe-area-inset-bottom))
-               max(14px, env(safe-area-inset-left));
-      max-width:430px;   /* 갤럭시 세로 모드 폭 느낌에 더 가깝게 */
+      gap:18px;                    /* 헤더-아이콘-하단 간격 */
+      padding:20px 18px 26px 18px; /* 위/좌우/아래 패딩 */
+      max-width:420px;             /* 갤럭시 세로 화면 느낌 */
       margin:0 auto;
     }
 
-    /* 헤더 */
+    /* 헤더 - 로고 가운데 쪽으로 */
     .brand{
       display:flex;
       align-items:center;
+      justify-content:center;      /* 가운데 정렬 느낌 */
       gap:10px;
-      margin:0 2px 4px;   /* 위/아래 여백 줄이기 */
+      margin:0 auto 6px auto;
     }
     .logo{
-      width:195px;
-      height:64px;
+      width:230px;                 /* 로고 조금 키움 */
+      height:70px;
       display:flex;
       align-items:center;
-      justify-content:flex-start;
+      justify-content:center;
     }
     .brand-logo{
       width:100%;
@@ -63,12 +61,12 @@
       letter-spacing:.2px;
     }
 
-    /* 메인 아이콘 그리드 (2개씩) */
+    /* 메인 아이콘 그리드 (2×N, 간격 줄이기) */
     .grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
-      row-gap:14px;   /* 세로 간격 줄임 */
-      column-gap:12px;/* 좌우 간격 줄임 */
+      row-gap:22px;    /* 세로 간격 */
+      column-gap:12px; /* 좌우 간격 */
       justify-items:center;
     }
 
@@ -79,10 +77,11 @@
       align-items:center;
       justify-content:center;
       -webkit-tap-highlight-color:transparent;
+      text-align:center;
     }
 
     .main-icon{
-      width:90px;          /* 갤럭시에서 보기 좋은 크기 */
+      width:115px;     /* 아이콘 조금 키워서 공간 채우기 */
       height:auto;
       object-fit:contain;
       display:block;
@@ -99,8 +98,8 @@
     .dock{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:10px;          /* 아이콘 사이 간격 줄이기 */
-      margin-top:12px;   /* 메인 아이콘과의 간격 줄이기 */
+      gap:12px;        /* 아이콘 사이 간격 */
+      margin-top:10px; /* 메인 아이콘과 간격 */
     }
     .dock a{
       text-decoration:none;
@@ -112,8 +111,8 @@
       -webkit-tap-highlight-color:transparent;
     }
     .pill{
-      width:56px;
-      height:56px;
+      width:58px;
+      height:58px;
       border-radius:18px;
       background:transparent;
       box-shadow:none;
